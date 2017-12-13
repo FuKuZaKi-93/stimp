@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Top{% endblock title %}
+
+{% block extrahead %}
+<link href="{% static 'css/img-size-fix.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block active-home %}class="active"{% endblock active-home %}
+
+{% block content %}
+  <div class="col-xs-12 col-sm-8 col-md-9">
+    <div class="row img-parent-container">
+    {% for img in img_list %}
+      <div class="content-box-fix">
+        <h4>{{ img.title }}</h4>
+        <p>お題　：{{ img.category }}</p>
+        <p>投稿者：{{ img.user }}</p>
+        <a href="{% url 'upload:detail' img.pk %}">
+          <div class="img-container">
+            <img class="cover-parent" src="{{ img.file.url }}" alt="{{ img.title }}">
+          </div>
+        </a>
+          <p>投稿日時：{{ img.created_at }}</p>
+      </div>
+    {% endfor %}
+    </div>
+    <div class="clearfix visible-xs visible-sm"></div>
+
+    <div class="text-xs-center">
+      {% include "upload/page.html" %}
+    </div>
+  </div>
+{% endblock content %}
+
+{% block themelist %}
+<h2>テーマリスト</h2>
+  <div>
+    {% for theme in theme_list %}
+      <p>{{ theme.title }}</p>
+    {% endfor %}
+  </div>
+{% endblock themelist %}
+

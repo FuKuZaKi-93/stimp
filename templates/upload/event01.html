@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Top{% endblock title %}
+
+{% block extrahead %}
+<link href="{% static 'css/img-size-fix.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block active-home %}class="active"{% endblock active-home %}
+
+{% block content %}
+<h1>後期中間発表で着る服</h1><br>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-9">
+         <div class="row img-parent-container">
+    {% for img in img_list %}
+<!--         <div class="col-sm-6 col-md-4">-->
+          <a href="{% url 'upload:detail' img.pk %}">
+         <div>
+          <p>{{ img.title }}</p>
+<!--          <p>{ img.category }}</p>-->
+          <div class="img-container">
+            <img class="cover-parent" src="{{ img.file.url }}" alt="{{ img.title }}">
+          </div>
+<!--         </div>-->
+         </div>
+          </a>
+    {% endfor %}
+        </div>
+        <div class="clearfix visible-xs visible-sm"></div>
+
+        <div class="text-xs-center">
+      {% include "upload/page.html" %}
+        </div>
+        </div>
+
+<div class="col-xs-12 col-sm-4 col-md-3">
+<h2>ランキング</h2>
+<h3>投稿数</h3>
+<p>工事中</p>
+<h3>投票数</h3>
+<p>工事中</p>
+<h2>募集中のお題</h2>
+<a href="{% url 'upload:event01' %}">後期中間発表で着る服</a>
+</div>
+      </div>
+{% endblock content %}
+
+

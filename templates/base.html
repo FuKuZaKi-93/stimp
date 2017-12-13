@@ -1,0 +1,83 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}stimp{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Bootstrap3-CSS -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
+        {% block extrahead %}{% endblock %}
+    </head>
+    <body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample4">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'upload:index_created_asc' %}">
+                    stimp
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarEexample4">
+
+           {% if user.is_authenticated %}
+               <ul class="nav navbar-nav">
+                 <li {% block active-home %}{% endblock %}>
+                   <a href="{% url 'upload:index_created_asc' %}">Home</a></li>
+                 <li {% block active-mypage %}{% endblock %}>
+                   <a href="{% url 'upload:mypage' %}">MyPage</a></li>
+                 <li {% block active-upload %}{% endblock %}>
+                   <a href="{% url 'upload:create' %}">Upload</a></li>
+               </ul>
+               <div class="nav navbar-nav navbar-right">
+                   <a href="{% url 'accounts:signout' %}">
+                     <button type="button" class="btn btn-danger navbar-btn">Sign out</button>
+                   </a>
+               </div>
+           {% else %}
+               <ul class="nav navbar-nav">
+                 <li>
+                   <a href="{% url 'upload:index_created_asc' %}">Home</a></li>
+                 <li>
+                   <a href="{% url 'upload:create' %}">Upload</a></li>
+               </ul>
+               <div class="navbar-right">
+                 <a href="{% url 'accounts:signup' %}">
+                   <button type="button" class="btn btn-primary navbar-btn">Sign up</button>
+                 </a>
+                 <a href="{% url 'accounts:signin' %}">
+                   <button type="button" class="btn btn-success navbar-btn">Sign in</button>
+                 </a>
+               </div>
+            {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fuild">
+        <div id="sortmenu" class="col-xs-12 col-sm-3 col-md-3 col-lg-3 container">
+          {% block sortmenulist %}
+          {% endblock sortmenulist %}
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        {% block content %}
+        {% endblock %}
+        </div>
+      </div>
+    </div>
+    </body>
+
+    <script src="{% static 'js/jquery-2.2.2.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block extraScript %}{% endblock %}
+
+    </html>
+

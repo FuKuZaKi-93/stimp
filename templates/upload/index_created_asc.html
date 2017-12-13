@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}Top{% endblock title %}
+
+
+{% block extrahead %}
+<link href="{% static 'css/img-size-fix.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+
+{% block active-home %}class="active"{% endblock active-home %}
+
+
+{% block sortmenulist %}
+{% include "upload/filterselect.html" %}
+{% endblock sortmenulist %}
+
+
+{% block content %}
+    <div id="main-content-imgs">
+    {% for img in img_list %}
+      <div class="img-item">
+        <a href="{% url 'upload:detail' img.pk %}">
+          <img src="{{ img.file.url }}" alt="{{ img.title }}">
+        </a>
+<!--          <a href="#">-->
+<!--            <p>{ img.user }}</p>
+          </a>-->
+      </div>
+    {% endfor %}
+    </div>
+
+    <div class="text-xs-center">
+      {% include "upload/page.html" %}
+    </div>
+{% endblock content %}

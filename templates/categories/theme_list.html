@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block themelist %}
+<h2>テーマリスト</h2>
+  <div>
+    {% for theme in theme_list %}
+      <p>{{ theme.theme }}</p>
+    {% endfor %}
+  </div>
+{% endblock themelist %}
