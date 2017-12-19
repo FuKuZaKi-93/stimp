@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Top{% endblock title %}
+
+{% block extrahead %}
+<link href="{% static 'css/img-size-fix.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block active-home %}class="active"{% endblock active-home %}
+
+{% block sortmenulist %}
+<!--    tablet & PC view   -->
+<div class="row hidden-xs">
+  <div class="col-sm-12">
+    <h3>Situation</h3>
+    {% for situation in situation_list %}
+    <p>{{ situation }}</p>
+    {% endfor %}
+  </div>
+  <div class="col-sm-12">
+    <h3>Color</h3>
+    {% for color in color_list %}
+    <p>{{ color }}</p>
+    {% endfor %}
+  </div>
+  <div class="col-sm-12">
+    <h3>Style</h3>
+    {% for style in style_list %}
+    <p>{{ style }}</p>
+    {% endfor %}
+  </div>
+  <div class="col-sm-12">
+    <h3>Season</h3>
+    {% for season in season_list %}
+    <p>{{ season }}</p>
+    {% endfor %}
+  </div>
+  <div class="col-sm-12">
+    <h3>Purpose</h3>
+    {% for purpose in purpose_list %}
+    <p>{{ purpose }}</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!--   smartphone view   -->
+<div class="row hidden-sm hidden-md hidden-lg container">
+  <form method="post" action="" name="filter_form">
+    {% csrf_token %}
+    <select id="sortselect" name="sortselect">
+      <option value="asc">新着順</option>
+      <option value="desc">古い順</option>
+      <option value="popular">評価の高い順</option>
+      <option value="many">評価数の多い順</option>
+    </select>
+      <a data-toggle="collapse" href="#filter-collapse">
+         詳細条件
+      </a>
+        <div id="filter-collapse" class="collapse">
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Situation
+              </label>
+              <div class="container">
+              {% for situation in situation_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ situation }} ({{ situation.img_num }})</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Color
+              </label>
+              <div class="container">
+              {% for color in color_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ color }} ({{ color.img_num }})</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Style
+              </label>
+              <div class="container">
+              {% for style in style_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ style }} ({{ style.img_num }})</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Season
+              </label>
+              <div class="container">
+              {% for season in season_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ season }} ({{ season.img_num }})</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Purpose
+              </label>
+              <div class="container">
+              {% for purpose in purpose_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ purpose }} ({{ purpose.img_num }})</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div>
+        </div>
+    <input type="submit" value="表示"></input>
+  </form>
+</div>
+{% endblock sortmenulist %}
+
+{% block content %}
+    <div id="main-content-imgs">
+    {% for img in img_list %}
+      <div class="img-item">
+        <a href="{% url 'upload:detail' img.pk %}">
+          <img src="{{ img.file.url }}" alt="{{ img.title }}">
+        </a>
+<!--          <a href="#">
+            <p>{ img.user }}</p>
+          </a>-->
+      </div>
+    {% endfor %}
+    </div>
+
+    <div class="text-xs-center">
+      {% include "upload/page.html" %}
+    </div>
+{% endblock content %}
+
+{% block extraScript %}
+<script src="{% static 'js/my_accordion.js' %}"></script>
+{% endblock extraScript %}

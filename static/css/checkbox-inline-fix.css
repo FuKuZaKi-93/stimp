@@ -1,0 +1,10 @@
+/* 上書き */
+.checkbox-inline + .checkbox-inline {
+	margin-left: 0px;
+	margin-right: 10px;
+}
+
+/* 追加 */
+.checkbox-inline:first-child {
+	margin-right: 10px;
+}

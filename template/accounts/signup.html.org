@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Signup{% endblock title %}
+
+{% block extrahead %}<link href="{% static 'css/span-fix.css' %}" rel="stylesheet">{% endblock extrahead %}
+
+{% block content %}
+<form method="post" action="{% url 'accounts:create' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.errors.username }}
+    <div class="input-group">
+        <span class="input-group-addon sign-span">Username</span>
+        {{ form.username }}
+    </div>
+    {{ form.errors.password1 }}
+    <div class="input-group">
+        <span class="input-group-addon sign-span">Password</span>
+        {{ form.password1 }}
+    </div>
+    {{ form.errors.password2 }}
+    <div class="input-group">
+        <span class="input-group-addon sign-span">Password(again)</span>
+        {{ form.password2 }}
+    </div>
+    <input class="btn btn-primary" type="submit" value="SignUp">
+</form>
+{% endblock content %}
+
+

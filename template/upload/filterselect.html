@@ -1,0 +1,164 @@
+<div id="sortmenu" class="col-xs-12 col-sm-3 col-md-3 col-lg-3 container">
+
+<div class="row hidden-xs">
+  <div class="col-sm-12">
+    <h4>催しの趣旨</h4>
+    {% for situation in situation_list %}
+    <label class="custom-control custom-checkbox">
+      <input name="situation" type="checkbox" class="custom-control-input">
+        {{ situation }} ({{ situation.img_num }})
+    </label><br>
+    {% endfor %}
+    <a href="">タグ一覧</a>
+  <hr>
+  </div>
+
+  <div class="col-sm-12">
+    <h4>参加者</h4>
+    {% for member in member_list %}
+    <label class="custom-control custom-checkbox">
+      <input name="situation" type="checkbox" class="custom-control-input">
+        {{ member }} ({{ member.img_num }})
+    </label><br>
+    {% endfor %}
+    <a href="">タグ一覧</a>
+  <hr>
+  </div>
+
+  <div class="col-sm-12">
+    <h4>会場</h4>
+    {% for place in place_list %}
+    <label class="custom-control custom-checkbox">
+      <input name="situation" type="checkbox" class="custom-control-input">
+        {{ place }} ({{ place.img_num }})
+    </label><br>
+    {% endfor %}
+    <a href="">タグ一覧</a>
+  <hr>
+  </div>
+
+  <div class="col-sm-12">
+    <h4>時期</h4>
+    {% for season in season_list %}
+    <label class="custom-control custom-checkbox">
+      <input name="situation" type="checkbox" class="custom-control-input">
+        {{ season }} ({{ season.img_num }})
+    </label><br>
+    {% endfor %}
+    <a href="">タグ一覧</a>
+  <hr>
+  </div>
+
+  <div class="col-sm-12">
+    <h4>服の色</h4>
+    {% for color in color_list %}
+    <label class="custom-control custom-checkbox">
+      <input name="situation" type="checkbox" class="custom-control-input">
+        {{ color }} ({{ color.img_num }})
+    </label><br>
+    {% endfor %}
+    <a href="">タグ一覧</a>
+  </div>
+</div>
+
+
+<!--   smartphone view   -->
+<div class="row hidden-sm hidden-md hidden-lg container">
+<!--  <form method="post" action="{ url 'upload:sort' %}" id="sortselect">-->
+  <form method="POST" action="" name="filter_form">
+    {% csrf_token %}
+    <select id="sort" name="sort">
+      <option value="1">新着順</option>
+      <option value="2">古い順</option>
+      <option value="3">評価の高い順</option>
+      <option value="4">評価数の多い順</option>
+    </select>
+      <a data-toggle="collapse" href="#filter-collapse">
+         詳細条件
+      </a>
+        <div id="filter-collapse" class="collapse">
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              催しの趣旨
+              </label>
+              <div class="container">
+              {% for situation in situation_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ situation }} ({{ situation.img_num }})</span>
+                </label>
+              {% endfor %}
+    <a href="">タグ一覧</a>
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              参加者
+              </label>
+              <div class="container">
+              {% for member in member_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ member }} ({{ member.img_num }})</span>
+                </label>
+              {% endfor %}
+    <a href="">タグ一覧</a>
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              会場
+              </label>
+              <div class="container">
+              {% for place in place_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ place }} ({{ place.img_num }})</span>
+                </label>
+              {% endfor %}
+    <a href="">タグ一覧</a>
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              時期
+              </label>
+              <div class="container">
+              {% for season in season_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ season }} ({{ season.img_num }})</span>
+                </label>
+              {% endfor %}
+    <a href="">タグ一覧</a>
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              服の色
+              </label>
+              <div class="container">
+              {% for color in color_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ color }} ({{ color.img_num }})</span>
+                </label>
+              {% endfor %}
+    <a href="">タグ一覧</a>
+              </div>
+            </div>
+        </div>
+    <input type="submit" value="表示"></input>
+  </form>
+</div>
+
+</div>

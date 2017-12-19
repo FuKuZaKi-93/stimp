@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}main{% endblock title %}
+ 
+{% block active-home %}class="active"{% endblock active-home %}
+ 
+{% block content %}
+{% if user.is_authenticated %}
+  <p>こんにちは{{ user.get_username }}さん</p>
+{% else %}
+  <p>こんにちはゲストさん</p>
+{% endif %}
+
+  <h1>This page is main-page.</h1><br>
+{% endblock content %}
+
+

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}login成功{% endblock title %}
+
+{% block body %}
+<h1>Success!!</h1><br>
+<a href="{% url 'main:index' %}">main</a><br>
+<a href="{% url 'accounts:logout' %}">logout</a>
+{% endblock body %}

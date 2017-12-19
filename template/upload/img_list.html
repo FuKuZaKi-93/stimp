@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Mypage{% endblock title %}
+
+{% block extrahead %}
+<link href="{% static 'css/img-size-fix.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block active-mypage %}class="active"{% endblock active-mypage %}
+
+{% block content %}
+        <div class="col-xs-12 col-sm-8 col-md-9">
+         <div class="row img-parent-container">
+    {% for img in img_list %}
+         <div>
+          <h3>{{ img.title }}</h3>
+          <p>お題：{{ img.category}}</p>
+          <div class="img-container">
+            <img class="cover-parent" src="{{ img.file.url }}" alt="{{ img.title }}">
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <a href="{% url 'upload:update' img.pk %}" class="btn btn-outline-primary pull-left yokonarabi">
+            更新
+            </a>
+            <a href="{% url 'upload:delete' img.pk %}" class="btn btn-outline-primary yokonarabi">
+            削除
+            </a>
+            <div class="clearfix visible-xs visible-sm"></div>
+          </div>
+         </div>
+    {% endfor %}
+        </div>
+        <div class="clearfix visible-xs visible-sm"></div>
+
+        <div class="text-xs-center">
+      {% include "upload/page.html" %}
+        </div>
+        </div>
+{% endblock content %}
+
+

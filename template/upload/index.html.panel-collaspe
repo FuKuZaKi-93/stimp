@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Top{% endblock title %}
+
+{% block extrahead %}
+<link href="{% static 'css/img-size-fix.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block active-home %}class="active"{% endblock active-home %}
+
+{% block sortmenulist %}
+<!--    tablet & PC view   -->
+<div class="row hidden-xs">
+  <div class="col-sm-12">
+    <h3>Situation</h3>
+    {% for situation in situation_list %}
+    <p>{{ situation }}</p>
+    {% endfor %}
+  </div>
+  <div class="col-sm-12">
+    <h3>Color</h3>
+    {% for color in color_list %}
+    <p>{{ color }}</p>
+    {% endfor %}
+  </div>
+  <div class="col-sm-12">
+    <h3>Style</h3>
+    {% for style in style_list %}
+    <p>{{ style }}</p>
+    {% endfor %}
+  </div>
+  <div class="col-sm-12">
+    <h3>Season</h3>
+    {% for season in season_list %}
+    <p>{{ season }}</p>
+    {% endfor %}
+  </div>
+  <div class="col-sm-12">
+    <h3>Purpose</h3>
+    {% for purpose in purpose_list %}
+    <p>{{ purpose }}</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!--   smartphone view   -->
+<div class="row hidden-sm hidden-md hidden-lg">
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <span class="glyphicon text-success"></span>絞り込み条件
+            <span class="glyphicon glyphicon-collapse-down pull-right"></span>
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse">
+        <form method="post" action="" name="filter_form" class="container">
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Situation
+              </label>
+              <div class="container">
+              {% for situation in situation_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ situation }}</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Color
+              </label>
+              <div class="container">
+              {% for color in color_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ color }}</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Style
+              </label>
+              <div class="container">
+              {% for style in style_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ style }}</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Season
+              </label>
+              <div class="container">
+              {% for season in season_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ season }}</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div><hr>
+
+            <div class="form-group row">
+              <label class="control-form-label col-xs-12">
+              Purpose
+              </label>
+              <div class="container">
+              {% for purpose in purpose_list %}
+                <label class="custom-control custom-checkbox checkbox-inline">
+                  <input name="situation" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ purpose }}</span>
+                </label>
+              {% endfor %}
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock sortmenulist %}
+
+{% block content %}
+    <div id="main-content-imgs">
+    {% for img in img_list %}
+      <div class="img-item">
+<!--        <a href="{ url 'upload:detail' img.pk %}">-->
+          <img src="{{ img.file.url }}" alt="{{ img.title }}">
+<!--        </a>
+          <a href="#">-->
+<!--            <p>{ img.user }}</p>
+          </a>-->
+      </div>
+    {% endfor %}
+    </div>
+
+    <div class="text-xs-center">
+      {% include "upload/page.html" %}
+    </div>
+{% endblock content %}
+
+{% block themelist %}
+{% endblock themelist %}
+
+{% block extraScript %}
+<script src="{% static 'js/my_accordion.js' %}"></script>
+{% endblock extraScript %}

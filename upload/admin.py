@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (
-    Img, Situation, ClothColor, CoordinateStyle, Season, Purpose,
+    img, situation, color, member, season, place,
 )
 
-admin.site.register((Img, Situation, ClothColor, CoordinateStyle, Season, Purpose,))
+admin.site.register((img.Img, situation.Situation, color.Color, member.Member, season.Season, place.Place,))

@@ -1,8 +1,6 @@
 from django import forms
 from .models import (
-    Img, Situation, ClothColor, CoordinateStyle, Season, Purpose,
-   # ITEM1_CHOICES, ITEM2_CHOICES,
-    Comment,
+    img, situation, color, member, season, place,
 )
 from django.contrib.auth.models import User
 
@@ -14,7 +12,7 @@ from PIL import Image
 
 class  SituationForm(forms.ModelForm):
     class Meta:
-        model = Situation
+        model = situation.Situation
         fields = ('situation',)
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
@@ -23,17 +21,17 @@ class  SituationForm(forms.ModelForm):
 
 class ColorForm(forms.ModelForm):
     class Meta:
-        model = ClothColor
+        model = color.Color
         fields = ('color',)
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             field.widget.attrs["class"] = "form-control"
 
 
-class StyleForm(forms.ModelForm):
+class PlaceForm(forms.ModelForm):
     class Meta:
-        model = CoordinateStyle
-        fields = ('style',)
+        model = place.Place
+        fields = ('place',)
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             field.widget.attrs["class"] = "form-control"
@@ -41,17 +39,17 @@ class StyleForm(forms.ModelForm):
 
 class SeasonForm(forms.ModelForm):
     class Meta:
-        model = Season
+        model = season.Season
         fields = ('season',)
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             field.widget.attrs["class"] = "form-control"
 
 
-class PurposeForm(forms.ModelForm):
+class MemberForm(forms.ModelForm):
     class Meta:
-        model = Purpose
-        fields = ('purpose',)
+        model = member.Member
+        fields = ('member',)
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             field.widget.attrs["class"] = "form-control"
@@ -61,28 +59,33 @@ class PurposeForm(forms.ModelForm):
 class ImgForm(forms.ModelForm):
 
     situation = forms.ModelMultipleChoiceField(
-        queryset=Situation.objects.all(),
+        label="催しの趣旨",
+        queryset=situation.Situation.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
-    color = forms.ModelMultipleChoiceField(
-        queryset=ClothColor.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-    )
-    style = forms.ModelMultipleChoiceField(
-        queryset=CoordinateStyle.objects.all(),
+    place = forms.ModelMultipleChoiceField(
+        label="会場",
+        queryset=place.Place.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
     season = forms.ModelMultipleChoiceField(
-        queryset=Season.objects.all(),
+        label="時期",
+        queryset=season.Season.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
-    purpose = forms.ModelMultipleChoiceField(
-        queryset=Purpose.objects.all(),
+    member = forms.ModelMultipleChoiceField(
+        label="参加者",
+        queryset=member.Member.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
- 
+    color = forms.ModelMultipleChoiceField(
+        label="服の色",
+        queryset=color.Color.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
+
     class Meta:
-        model = Img
+        model = img.Img
         exclude = ('title', 'user',)
 
         def __init__(self, *args, **kwargs):
@@ -96,8 +99,9 @@ class ImgForm(forms.ModelForm):
             }),
         }
 
-
+"""
 class CommentCreateForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('text',)
+"""

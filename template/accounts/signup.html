@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Signup{% endblock title %}
+
+{% block extrahead %}<link href="{% static 'css/span-fix.css' %}" rel="stylesheet">{% endblock extrahead %}
+
+{% block content %}
+<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+
+<form method="POST" action="{% url 'accounts:create' %}">
+    {{ user_form.non_field_errors }}
+    {{ user_form.errors.username }}
+    <div class="input-group">
+        <span class="input-group-addon sign-span">ユーザー名</span>
+        {{ user_form.username }}
+    </div>
+    {{ user_form.errors.password1 }}
+    <div class="input-group">
+        <span class="input-group-addon sign-span">パスワード</span>
+        {{ user_form.password1 }}
+    </div>
+    {{ user_form.errors.password2 }}
+    <div class="input-group">
+        <span class="input-group-addon sign-span">パスワード（再入力）</span>
+        {{ user_form.password2 }}
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon sign-span">性別</span>
+        {{ profile_form.gendar }}
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon sign-span">生年月日</span>
+        {{ profile_form.birthday }}
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon sign-span">住まい（都道府県）</span>
+        {{ profile_form.prefecture }}
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon sign-span">業種</span>
+        {{ profile_form.industry }}
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon sign-span">職種</span>
+        {{ profile_form.occupation }}
+    </div>
+
+    {% csrf_token %}
+    <input class="btn btn-primary" type="submit" value="SignUp">
+</form>
+
+</div>
+{% endblock content %}
+
+
