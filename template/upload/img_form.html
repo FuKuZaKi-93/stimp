@@ -27,51 +27,54 @@
 {{ form.file }}
 </div>
         </div>
+        <div class="preview"></div><hr>
+
 
         <div class="form-group row">
         <label class="control-form-label col-sm-3">
-        {{ form.situation.label }}
+        シーン
         </label>
+        <select name="scene">
+          <option value="buisiness">ビジネス</option>
+          <option value="private">プライベート</option>
+        </select>
         <div class="col-sm-9">
-      {% for situation in form.situation %}
+          <div id="buisiness">
+      {% for buisiness_scene in form.buisiness_scene %}
         <label class="custom-control custom-checkbox checkbox-inline">
           <input name="situation" type="checkbox" class="custom-control-input">
           <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">{{ situation }}</span>
+          <span class="custom-control-description">{{ buisiness_scene }}</span>
         </label>
       {% endfor %}
-        </div>
-        </div>
+          </div>
 
-        <div class="form-group row">
-        <label class="control-form-label col-sm-3">
-        {{ form.member.label }}
-        </label>
-        <div id="{{ form.member.field.id }}" class="col-sm-9">
-      {% for member in form.member %}
+          <div id="private">
+      {% for private_scene in form.private_scene %}
         <label class="custom-control custom-checkbox checkbox-inline">
           <input name="situation" type="checkbox" class="custom-control-input">
           <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">{{ member }}</span>
+          <span class="custom-control-description">{{ private_scene }}</span>
         </label>
       {% endfor %}
+          </div>
         </div>
-        </div>
+        </div><hr>
 
-        <div class="form-group row">
+<!--        <div class="form-group row">
         <label class="control-form-label col-sm-3">
-        {{ form.place.label }}
+        { form.place.label }}
         </label>
-        <div id="{{ form.place.field.id }}" class="col-sm-9">
-      {% for place in form.place %}
+        <div id="{ form.place.field.id }}" class="col-sm-9">
+      { for place in form.place %}
         <label class="custom-control custom-checkbox checkbox-inline">
           <input name="situation" type="checkbox" class="custom-control-input">
           <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">{{ place }}</span>
+          <span class="custom-control-description">{place }}</span>
         </label>
-      {% endfor %}
+      % endfor %}
         </div>
-        </div>
+        </div>-->
 
         <div class="form-group row">
         <label class="control-form-label col-sm-3">
@@ -80,13 +83,14 @@
         <div id="{{ form.season.field.id }}" class="col-sm-9">
       {% for season in form.season %}
         <label class="custom-control custom-checkbox checkbox-inline">
-          <input name="situation" type="checkbox" class="custom-control-input">
+          <input name="season" type="checkbox" class="custom-control-input">
           <span class="custom-control-indicator"></span>
           <span class="custom-control-description">{{ season }}</span>
         </label>
       {% endfor %}
         </div>
-        </div>
+        </div><hr>
+
 
         <div class="form-group row">
         <label class="control-form-label col-sm-3">
@@ -95,14 +99,44 @@
         <div id="{{ form.color.field.id }}" class="col-sm-9">
       {% for color in form.color %}
         <label class="custom-control custom-checkbox checkbox-inline">
-          <input name="situation" type="checkbox" class="custom-control-input">
+          <input name="color" type="checkbox" class="custom-control-input">
           <span class="custom-control-indicator"></span>
           <span class="custom-control-description">{{ color }}</span>
         </label>
       {% endfor %}
         </div>
-        </div>
+        </div><hr>
 
+
+        <div class="form-group row">
+        <label class="control-form-label col-sm-3">
+        {{ form.theme.label }}
+        </label>
+        <div id="{{ form.theme.field.id }}" class="col-sm-9">
+      {% for theme in form.theme %}
+        <label class="custom-control custom-checkbox checkbox-inline">
+          <input name="theme" type="checkbox" class="custom-control-input">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">{{ theme }}</span>
+        </label>
+      {% endfor %}
+        </div>
+        </div><hr>
+
+        <div class="form-group row">
+        <label class="control-form-label col-sm-3">
+        {{ form.theme.label }}
+        </label>
+        <div id="{{ form.theme.field.id }}" class="col-sm-9">
+      {% for theme in form.theme %}
+        <label class="custom-control custom-checkbox checkbox-inline">
+          <input name="theme" type="checkbox" class="custom-control-input">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">{{ theme }}</span>
+        </label>
+      {% endfor %}
+        </div>
+        </div><hr>
 
       {% csrf_token %}
       <div class="text-xs-center">
@@ -113,3 +147,6 @@
 </div>
 {% endblock content %}
 
+{% block extraScript %}
+  <script src="{% static 'js/img_form.js' %}"></script>
+{% endblock extraScript %}

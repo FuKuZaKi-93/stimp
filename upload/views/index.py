@@ -3,11 +3,9 @@ from django.views import generic
 from django.views.generic.edit import FormMixin
 from upload.models import (
     img,
-    situation, color, member, season, place,
 )
 from upload.forms import (
     ImgForm,
-    SituationForm, ColorForm, MemberForm, SeasonForm, PlaceForm,
 )
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -54,14 +52,15 @@ class ImgDeleteView(generic.DeleteView):
         return context
 """
 
-"""
-class ImgDetailWithCommentView(FormMixin, generic.DetailView):
-    model = Img
+
+class ImgDetailWithCommentView(generic.DetailView):
+    model = img.Img
+    """
     form_class = CommentCreateForm
     def form_valid(self, form):
         img_pk = self.kwargs['pk']
         self.object = form.save(commit=False)
-        self.object.target = Img.objects.get(pk=img_pk)
+        self.object.target = img.Img.objects.get(pk=img_pk)
         self.object.save()
         return redirect('upload:detail', pk=img_pk)
 
@@ -71,7 +70,7 @@ class ImgDetailWithCommentView(FormMixin, generic.DetailView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-"""
+    """
 
 class ImgVoteView(generic.UpdateView):
     model = img.Img

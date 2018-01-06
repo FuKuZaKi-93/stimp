@@ -1,3 +1,5 @@
+import os
+import uuid
 
 def get_image_path(self, filename):
     prefix = 'images/'

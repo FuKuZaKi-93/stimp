@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import index, main_list
+from .views import index, main_list, like
 from django.contrib.auth.decorators import login_required
 #from .views import ImgDeleteView
 
@@ -13,8 +13,10 @@ urlpatterns = [
         index.ImgUpdateView.as_view(), name='update'),
     url(r'^upload/delete/(?P<pk>[0-9]+)/$',
         index.ImgDeleteView.as_view(), name='delete'),
+    url(r'^upload/like/(?P<id>[0-9]+)/$',
+        like.like, name='like'),
 #    url(r'^event01/$', index.ImgEvent01View.as_view(), name='event01'),
-#    url(r'^detail/(?P<pk>[0-9]+)/$', index.ImgDetailWithCommentView.as_view(), name='detail'),
+    url(r'^detail/(?P<pk>[0-9]+)/$', index.ImgDetailWithCommentView.as_view(), name='detail'),
 
 #    url(r'^situation/$', index.SituationCreate.as_view(), name='situation'),
 ]

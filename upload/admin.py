@@ -1,6 +1,14 @@
 from django.contrib import admin
 from .models import (
-    img, situation, color, member, season, place,
+    img, buisiness_scene, private_scene, color, season, theme,
+    like,
 )
 
-admin.site.register((img.Img, situation.Situation, color.Color, member.Member, season.Season, place.Place,))
+admin.site.register((img.Img,
+                    buisiness_scene.BuisinessScene,
+                    private_scene.PrivateScene,
+                    color.Color,
+                    season.Season,
+                    theme.Theme,
+
+                    like.Like))

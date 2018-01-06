@@ -1,2 +1,2 @@
 from upload.models import img
-from upload.models import situation, place, color, season, member
+from upload.models import buisiness_scene, private_scene, theme, color, season, like, favorite

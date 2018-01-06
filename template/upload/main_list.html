@@ -23,12 +23,19 @@
     <div id="main-content-imgs">
     {% for img in img_list %}
       <div class="img-item">
+        <div class="img-content">
         <a href="{% url 'upload:detail' img.pk %}">
-          <img src="{{ img.file.url }}" alt="{{ img.title }}">
+          <img src="{{ img.file.url }}" alt="">
         </a>
-<!--          <a href="#">-->
-<!--            <p>{ img.user }}</p>
-          </a>-->
+        </div>
+          <a href="#">
+            <div>{{ img.user }}</div>
+          </a>
+          <button type="submit" formaction="{% url 'upload:like' img.id %}" data-condition=false class="favoButton" data-favoNum=1>☆</button>
+          <form action="{% url 'upload:like' img.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="like"></input>
+          </form>
       </div>
     {% endfor %}
     </div>
@@ -38,3 +45,7 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block extraScript %}
+  <script src="{% static 'js/favorite.js' %}"></script>
+{% endblock extraScript %}

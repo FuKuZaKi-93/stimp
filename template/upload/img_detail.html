@@ -7,26 +7,20 @@
 
 
 {% block content %}
-<div class="col-xs-12 col-sm-8 col-md-9">
+<div class="container">
   <div class="row">
     <div class="text-xs-center">
       <div class="col-xs-12 col-sm-8 col-md-9">
-        <h3>{{ img.title }}</h3>
-        <p>お題：{{ img.category }}</p><br>
         <div class="img-container-detail pull-left">
-          <img class="cover-parent" src="{{ img.file.url }}" alt="{{ img.title }}">
+          <img class="cover-parent" src="{{ img.file.url }}"> 
         </div>
-      </div>
-      <div class="col-xs-12 col-sm-4 col-md-3">
-        <h2>コメント一覧</h2>
-        {% for comment in img.comment_set.all %}
-          {{ comment.text }}<hr>
-        {% endfor %}
-        <form action="{% url 'upload:detail' img.pk %}" method="POST">
-          {{ form }}
-          {% csrf_token %}
-          <input type="submit" value="コメントする" disabled="disabled">
-        </form>
+        <div class="col-xs-12 col-sm-4 col-md-3">
+          <p>{{ img.buisiness_scene }}</p>
+          <p>{{ img.private_scene }}</p>
+          <p>{{ img.season }}</p>
+          <p>{{ img.color }}</p>
+          <p>{{ img.theme }}</p>
+        </div>
       </div>
     </div>
    <!-- { csrf_token %}-->
