@@ -31,10 +31,9 @@
           <a href="#">
             <div>{{ img.user }}</div>
           </a>
-          <button type="submit" formaction="{% url 'upload:like' img.id %}" data-condition=false class="favoButton" data-favoNum=1>☆</button>
-          <form action="{% url 'upload:like' img.id %}" method="post">
+          <form id="{{ img.pk }}" class="likeform" action="{% url 'upload:like' img.id %}" method="post">
             {% csrf_token %}
-            <input type="submit" value="like"></input>
+            <input name="{{ img.pk }}" class="btn btn-default btn-sm" type="submit" value="like">{{ img.favorited }}</input>
           </form>
       </div>
     {% endfor %}
@@ -47,5 +46,6 @@
 {% endblock content %}
 
 {% block extraScript %}
+  <script src="{% static 'js/ajax-csrf.js' %}"></script>
   <script src="{% static 'js/favorite.js' %}"></script>
 {% endblock extraScript %}

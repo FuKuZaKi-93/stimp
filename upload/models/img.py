@@ -30,6 +30,7 @@ class Img(models.Model):
     created_at = models.DateTimeField("作成日", auto_now_add=True)
     updated_at = models.DateTimeField("更新日", auto_now=True)
 
+    favorited  = models.IntegerField("お気に入り登録数", default=0)
 
 #    def __unicode__(self):
 #        return self.title

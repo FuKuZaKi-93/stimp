@@ -1,21 +1,21 @@
 <div id="sortmenu" class="col-xs-12 col-sm-3 col-md-3 col-lg-3 container">
 
 <div class="row hidden-xs">
-  <form method="POST" action="" name="filter_form">
+  <form method="get" action="{% url 'upload:main_list' %}" name="filter_form">
     {% csrf_token %}
   <div class="col-sm-12">
     <h4>シーン</h4>
     <h5>ビジネス</h5>
     {% for buisiness_scene in buisiness_scene_list %}
     <label class="custom-control custom-checkbox">
-      <input name="situation" type="checkbox" class="custom-control-input">
+      <input name="buisiness_scene" type="checkbox" value="{{ buisiness_scene }}" class="custom-control-input">
         {{ buisiness_scene }} ({{ buisiness_scene.img_num }})
     </label><br>
     {% endfor %}
     <h5>プライベート</h5>
     {% for private_scene in private_scene_list %}
     <label class="custom-control custom-checkbox">
-      <input name="situation" type="checkbox" class="custom-control-input">
+      <input name="private_scene" type="checkbox" value="{{ private_scene }}" class="custom-control-input">
         {{ private_scene }} ({{ private_scene.img_num }})
     </label><br>
     {% endfor %}
@@ -26,7 +26,7 @@
     <h4>シーズン</h4>
     {% for season in season_list %}
     <label class="custom-control custom-checkbox">
-      <input name="season" type="checkbox" class="custom-control-input">
+      <input name="season" type="checkbox" value="{{ season }}" class="custom-control-input">
         {{ season }} ({{ season.img_num }})
     </label><br>
     {% endfor %}
@@ -37,7 +37,7 @@
     <h4>メインカラー</h4>
     {% for color in color_list %}
     <label class="custom-control custom-checkbox">
-      <input name="color" type="checkbox" class="custom-control-input">
+      <input name="color" type="checkbox" value="{{ color }}" class="custom-control-input">
         {{ color }} ({{ color.img_num }})
     </label><br>
     {% endfor %}
@@ -48,7 +48,7 @@
     <h4>テーマ</h4>
     {% for theme in theme_list %}
     <label class="custom-control custom-checkbox">
-      <input name="theme" type="checkbox" class="custom-control-input">
+      <input name="theme" type="checkbox" value="{{ theme }}" class="custom-control-input">
         {{ theme }} ({{ theme.img_num }})
     </label><br>
     {% endfor %}
@@ -143,9 +143,9 @@
               {% endfor %}
               </div>
             </div>
-        </div>
-    <a id="tag_list" class="hidden" href="#">タグ一覧へ</a>
     <input type="submit" value="絞り込み"></input>
+        </div>
+    <a id="tag_list" href="#">タグ一覧へ</a>
   </form>
 </div>
 

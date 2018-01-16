@@ -1,32 +1,53 @@
-$('#getform').submit(function() {
-    $('#result').html('');
+$(".favoButton").click(function() {
+  //押されたボタンの特定
+  var num = $(this).data("favonum");
+  var button = this;
+  //お気に入りボタンのdata-conditionで制御
+  if($(this).data('condition') == false){
+
+    //お気に入り登録
     $.ajax({
-        'url':'{% url "api_v1_posts" %}',
-        'type':'GET',
-        'data':{
-            'query':$('#query').val(),
-        },
-        'dataType':'json',
-        'success':function(response){
-            $.each(response.result_list, function(index, title) {
-                $('#result').append('<p>'+ title +'</p>')
-            });              
-        },
+      url: $('button.favoButton').attr('formaction'),
+      type: 'POST',
+      dataType: 'json',
+      data: {favonum: num},
+    })
+    .done(function(data, textStatus, jqXHR) {
+      //登録成功
+      if(data.result == true){
+        //お気に入りボタンの色を黄色に
+        $(button).css('backgroundColor', '#FF0');
+        //お気に入りボタン状態の更新
+        $(button).data('condition',true);
+      }
+    })
+    .fail(function(data) {
+      console.log("error");
     });
-    return false;
-});
-$('#postform').submit(function() {
+
+  }
+
+  else if($(this).data('condition') == true){
+
+    //お気に入り登録解除
     $.ajax({
-        'url':'{% url "api_v1_posts" %}',
-        'type':'POST',
-        'data':{
-            'title':$('#title').val(),
-        },
-        'dataType':'json',
-        'success':function(r){
-            message = 'pk→' + r.pk +  '\ntitle→' + r.title + '\n日付→'+ r.created_at;
-            alert(message);           
-        },
+      url: $('button.favoButton').attr('formaction'),
+      type: 'POST',
+      dataType: 'json',
+      data: {favonum: num},
+    })
+    .done(function(data, textStatus, jqXHR) {
+      //登録解除成功
+      if(data.result == true){
+        //背景色を解除
+        $(button).css('backgroundColor', '');
+        //お気に入りボタン状態の更新
+        $(button).data('condition',false);
+      }
+    })
+    .fail(function(data) {
+      console.log("error");
     });
-    return false;
+  }
 });
+

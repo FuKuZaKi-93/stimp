@@ -1,52 +1,49 @@
-$(".favoButton").click(function() {
-  //押されたボタンの特定
-  var num = $(this).data("favonum");
-  var button = this;
-  //お気に入りボタンのdata-conditionで制御
-  if($(this).data('condition') == false){
-
-    //お気に入り登録
-    $.ajax({
-      url: $('button.favoButton').attr('formaction'),
-      type: 'POST',
-      dataType: 'json',
-      data: {favonum: num},
-    })
-    .done(function(data, textStatus, jqXHR) {
-      //登録成功
-      if(data.result == true){
-        //お気に入りボタンの色を黄色に
-        $(button).css('backgroundColor', '#FF0');
-        //お気に入りボタン状態の更新
-        $(button).data('condition',true);
-      }
-    })
-    .fail(function(data) {
-      console.log("error");
+$(".likeform").click(function() {
+    $('.likeform').submit(function() {
+        $.ajax({
+            'url': $(this).attr('action'),
+            'type':'POST',
+            }).done(function(response){
+                var thisform = $(this).attr('id')
+                $('input[name=thisform]').toggleClass('btn-default btn-success');
+                alert(response.message);
+                //$(this).data('condition',true);
+        });
+    return false;
     });
-    
-  }
-
-  else if($(this).data('condition') == true){
-
-    //お気に入り登録解除
-    $.ajax({
-      url: $('button.favoButton').attr('formaction'),
-      type: 'POST',
-      dataType: 'json',
-      data: {favonum: num},
-    })
-    .done(function(data, textStatus, jqXHR) {
-      //登録解除成功
-      if(data.result == true){
-        //背景色を解除
-        $(button).css('backgroundColor', '');
-        //お気に入りボタン状態の更新
-        $(button).data('condition',false);
-      }
-    })
-    .fail(function(data) {
-      console.log("error");
-    });
-  }
 });
+
+/*
+$(".favoButton").click(function() {
+    if($(this).data('condition') == false){
+        $('.favoButton').submit(function() {
+            $.ajax({
+                'url': $(this).attr('action'),
+                'type':'POST',
+                'data': {'favonum':$(this).data('favonum')},
+                'dataType':'jsonp',
+                })
+                .done(function(response){
+                    $(this).css('backgroundColor', '#FF0');
+                    $(this).data('condition',true);
+            });
+        return false;
+        });
+    }else{
+    if($(this).data('condition') == true){
+        $('.favoButton').submit(function() {
+            $.ajax({
+                'url': $(this).attr('action'),
+                'type':'POST',
+                'data': {'favonum':$(this).data('favonum')},
+                'dataType':'json',
+                'success':function(response){
+                    $(this).css('backgroundColor', '');
+                    $(this).data('condition',false);
+                    alert("ok!");
+                },
+            });
+        return false;
+        });
+    }};
+});*/
