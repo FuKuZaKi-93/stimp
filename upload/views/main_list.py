@@ -10,6 +10,7 @@ from upload.models import (
 )
 from upload.models.img import Img
 from upload.models.like import Like
+from upload.models.rate import Rate
 from upload.forms import (
     ImgForm,
 )
@@ -52,6 +53,11 @@ class ImgIndexView(generic.ListView):
         context['seasons'] =seasons
         context['colors'] = colors
         context['themes'] = themes
+
+
+
+        rate_img = Rate.objects.filter(user__exact=self.request.user,
+                                       objent_id__exact=img.id)
 
         return context
 

@@ -88,7 +88,9 @@ class ImgForm(forms.ModelForm):
 
     class Meta:
         model = img.Img
-        exclude = ('user',)
+        exclude  = ('user',
+                    'favorited',
+                    'rated', 'rate_sum', 'rate_ave',)
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)

@@ -7,6 +7,7 @@
 
 {% block extrahead %}
 <link href="{% static 'css/img-size-fix.css' %}" rel="stylesheet">
+<link href="{% static 'css/star-rating.css' %}" rel="stylesheet">
 {% endblock extrahead %}
 
 
@@ -31,10 +32,44 @@
           <a href="#">
             <div>{{ img.user }}</div>
           </a>
+          <div style="display:inline-flex">
           <form id="{{ img.pk }}" class="likeform" action="{% url 'upload:like' img.id %}" method="post">
             {% csrf_token %}
-            <input name="{{ img.pk }}" class="btn btn-default btn-sm" type="submit" value="like">{{ img.favorited }}</input>
+            <input name="{{ img.pk }}" class="btn btn-default btn-sm"
+                   type="submit" value="お気に入り({{ img.favorited }})"></input>
           </form>
+            <button class="btn btn-default btn-sm"
+                    type="button" value="rate({{ img.favorited }})"
+                    data-toggle="modal" data-target="#sampleModal{{ img.pk }}">
+              評価({{ img.favorited }})</input>
+          </div>
+        <div class="modal fade" id="sampleModal{{ img.pk }}" tabindex="-1">
+         <div class="modal-dialog">
+          <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">
+               <span>×</span>
+             </button>
+           </div>
+           <div class="modal-body">
+          <form id="rate{{ img.pk }}" action="#" class="rateform" method="post">
+            {% csrf_token %}
+          <span class="star-rating">
+            <input type="radio" name="rating" value="1"><i></i>
+            <input type="radio" name="rating" value="2"><i></i>
+            <input type="radio" name="rating" value="3"><i></i>
+            <input type="radio" name="rating" value="4"><i></i>
+            <input type="radio" name="rating" value="5"><i></i>
+          </span>
+          </form>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">
+               閉じる</button>
+           </div>
+          </div>
+         </div>
+        </div>
       </div>
     {% endfor %}
     </div>

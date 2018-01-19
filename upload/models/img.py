@@ -32,6 +32,10 @@ class Img(models.Model):
 
     favorited  = models.IntegerField("お気に入り登録数", default=0)
 
+    rated = models.IntegerField("評価者数", default=0)
+#    rate_sum = models.IntegerField("評価累計", default=0)
+#    rate_ave = models.IntegerField("評価平均", default=0)
+
 #    def __unicode__(self):
 #        return self.title
 
